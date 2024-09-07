@@ -70,6 +70,28 @@ impl LessSafeKey {
         )
     }
 
+    /// Like [`open_in_place_separate_tag`](Self::open_in_place_separate_tag),
+    /// except the authentication tag is not checked.
+    ///
+    /// # Safety
+    ///
+    /// TODO.
+    #[inline]
+    pub unsafe fn open_in_place_unchecked<A>(
+        &self,
+        nonce: Nonce,
+        aad: Aad<A>,
+        in_out: &mut [u8],
+        ciphertext: RangeFrom<usize>,
+    ) -> Result<Tag, error::Unspecified>
+    where
+        A: AsRef<[u8]>,
+    {
+        let aad = Aad::from(aad.as_ref());
+        self.algorithm
+            .open(&self.inner, nonce, aad, in_out, ciphertext, cpu::features())
+    }
+
     /// Like [`super::OpeningKey::open_in_place()`], except it accepts an
     /// arbitrary nonce.
     ///

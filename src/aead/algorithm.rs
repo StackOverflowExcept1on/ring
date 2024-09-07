@@ -113,6 +113,20 @@ impl Algorithm {
     }
 
     #[inline]
+    pub(super) fn open(
+        &self,
+        key: &KeyInner,
+        nonce: Nonce,
+        aad: Aad<&[u8]>,
+        in_out: &mut [u8],
+        src: RangeFrom<usize>,
+        cpu_features: cpu::Features,
+    ) -> Result<Tag, error::Unspecified> {
+        let calculated_tag = (self.open)(key, nonce, aad, in_out, src, cpu_features)?;
+        Ok(calculated_tag)
+    }
+
+    #[inline]
     pub(super) fn seal(
         &self,
         key: &KeyInner,

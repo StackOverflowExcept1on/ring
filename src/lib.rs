@@ -62,6 +62,7 @@
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::doc_lazy_continuation,
+    clippy::too_long_first_doc_paragraph,
     non_camel_case_types,
     non_snake_case,
     unsafe_code

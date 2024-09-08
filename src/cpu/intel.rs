@@ -63,7 +63,7 @@ pub(super) mod featureflags {
             static mut OPENSSL_ia32cap_P: [u32; 4];
         }
         // SAFETY: https://github.com/rust-lang/rust/issues/125833
-        let p = unsafe { ptr::addr_of!(OPENSSL_ia32cap_P) };
+        let p = ptr::addr_of!(OPENSSL_ia32cap_P);
         // SAFETY: Since only `get_or_init()` could have created
         // `_cpu_features`, and it only does so after the `INIT.call_once()`,
         // which guarantees `happens-before` semantics, we can read from

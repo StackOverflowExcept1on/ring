@@ -75,7 +75,7 @@ impl LessSafeKey {
     ///
     /// # Safety
     ///
-    /// TODO.
+    /// The caller is responsible for checking the integrity of the message.
     #[inline]
     pub unsafe fn open_in_place_unchecked<A>(
         &self,
